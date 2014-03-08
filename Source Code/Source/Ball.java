@@ -31,7 +31,8 @@ import java.awt.*;
 public class Ball extends Structure implements Constants {
 	//Variables
 	private boolean onScreen;
-	private int xDir = 1, yDir = -1;
+	private double xDir = 1, yDir = -1;
+        private int speed = BALL_DEFAULT_SPEED;
 
 	//Constructor
 	public Ball(int x, int y, int width, int height, Color color) {
@@ -74,11 +75,11 @@ public class Ball extends Structure implements Constants {
 	}
 
 	//Accessor methods
-	public int getXDir() {
+	public double getXDir() {
 		return xDir;
 	}
 
-	public int getYDir() {
+	public double getYDir() {
 		return yDir;
 	}
 

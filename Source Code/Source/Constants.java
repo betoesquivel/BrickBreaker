@@ -43,7 +43,8 @@ public interface Constants {
     public static final int BALL_RIGHT_BOUND = WINDOW_WIDTH - BALL_WIDTH;
     public static final int BALL_BOTTOM_BOUND = WINDOW_HEIGHT - BALL_HEIGHT;
     public static final int BALL_X_START = WINDOW_WIDTH / 2 - BALL_WIDTH / 2;
-    public static final int BALL_Y_START = WINDOW_HEIGHT / 2 - BALL_HEIGHT / 2;
+    public static final int BALL_Y_START = 3 * WINDOW_HEIGHT / 4 - BALL_HEIGHT / 2;
+    public static final int BALL_DEFAULT_SPEED = 1; 
 
     //Paddle
     public static final int PADDLE_WIDTH = 45;
@@ -60,12 +61,25 @@ public interface Constants {
     public static final int PADDLE_STOP = 0;
 
     //Bricks
-    public static final int BRICK_WIDTH = 50;
-    public static final int BRICK_HEIGHT = 25;
-    public static final int MAX_BRICKS = 65;
-    public static final int BRICK_COLUMNS = 15;
+    public static final int BRICK_WIDTH = 39;
+    public static final int BRICK_HEIGHT = 39;
+    public static final int BRICK_COLUMNS = 18;
     public static final int BRICK_ROWS = 9;
+    public static final int MAX_BRICKS = BRICK_COLUMNS * BRICK_ROWS;
     public static final int NO_BRICKS = 0;
+    
+    //Periodic Table Positions
+    public static final int PERIODIC_TABLE [][] = new int[][]{
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
+        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0}
+    };
 
     //Brick Colors
     public static final Color BLUE_BRICK_ONE = new Color(0, 0, 255);

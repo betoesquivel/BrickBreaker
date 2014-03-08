@@ -42,7 +42,7 @@ public class Board extends JPanel implements Runnable, Constants {
     //Items on-screen
     private Paddle paddle;
     private Ball ball;
-    private Brick[][] brick = new Brick[BRICK_COLUMNS][BRICK_ROWS];
+    private Brick[][] brick = new Brick[BRICK_ROWS][BRICK_COLUMNS];
 
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = MAX_BRICKS, waitTime = 3, xSpeed, withSound, level = 1;
@@ -116,21 +116,25 @@ public class Board extends JPanel implements Runnable, Constants {
         stop();
         isPaused.set(true);
     }
-
+    
+    public int isInThePeriodicTable(int j, int i){
+        return PERIODIC_TABLE[j][i]; 
+    }
+    
     //fills the array of bricks
     public void makeBricks() {
-        for (int i = 0; i < BRICK_COLUMNS; i++) {
-            for (int j = 0; j < BRICK_ROWS; j++) {
+        for (int j = 0; j < BRICK_ROWS; j++) {
+            for (int i = 0; i < BRICK_COLUMNS; i++) {
                 Random rand = new Random();
                 int itemType = rand.nextInt(3) + 1;
-                int DestroyedOrNot = rand.nextInt(2) + 1;
+                int DestroyedOrNot = isInThePeriodicTable(j, i);
                 int numLives = 3;
                 Color color = colors[rand.nextInt(7)][0];
-                brick[i][j] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
+                brick[j][i] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
                 if (DestroyedOrNot == 1) {
-                    brick[i][j].setDestroyed(true);
+                    brick[j][i].setDestroyed(false);
                 } else {
-                    brick[i][j].setDestroyed(false);
+                    brick[j][i].setDestroyed(true);
                 }
             }
         }
@@ -279,40 +283,40 @@ public class Board extends JPanel implements Runnable, Constants {
     }
 
     public void checkBricks(int x1, int y1) {
-        for (int i = 0; i < BRICK_COLUMNS; i++) {
-            for (int j = 0; j < BRICK_ROWS; j++) {
-                if (brick[i][j].hitBottom(x1, y1)) {
+        for (int j = 0; j < BRICK_ROWS; j++) {
+            for (int i = 0; i < BRICK_COLUMNS; i++) {
+                if (brick[j][i].hitBottom(x1, y1)) {
                     ball.setYDir(1);
-                    if (brick[i][j].isDestroyed()) {
+                    if (brick[j][i].isDestroyed()) {
                         bricksLeft--;
                         score += 50;
-                        addItem(brick[i][j].item);
+                        addItem(brick[j][i].item);
                     }
                 }
-                if (brick[i][j].hitLeft(x1, y1)) {
+                if (brick[j][i].hitLeft(x1, y1)) {
                     xSpeed = -xSpeed;
                     ball.setXDir(xSpeed);
-                    if (brick[i][j].isDestroyed()) {
+                    if (brick[j][i].isDestroyed()) {
                         bricksLeft--;
                         score += 50;
-                        addItem(brick[i][j].item);
+                        addItem(brick[j][i].item);
                     }
                 }
-                if (brick[i][j].hitRight(x1, y1)) {
+                if (brick[j][i].hitRight(x1, y1)) {
                     xSpeed = -xSpeed;
                     ball.setXDir(xSpeed);
-                    if (brick[i][j].isDestroyed()) {
+                    if (brick[j][i].isDestroyed()) {
                         bricksLeft--;
                         score += 50;
-                        addItem(brick[i][j].item);
+                        addItem(brick[j][i].item);
                     }
                 }
-                if (brick[i][j].hitTop(x1, y1)) {
+                if (brick[j][i].hitTop(x1, y1)) {
                     ball.setYDir(-1);
-                    if (brick[i][j].isDestroyed()) {
+                    if (brick[j][i].isDestroyed()) {
                         bricksLeft--;
                         score += 50;
-                        addItem(brick[i][j].item);
+                        addItem(brick[j][i].item);
                     }
                 }
             }
@@ -359,9 +363,9 @@ public class Board extends JPanel implements Runnable, Constants {
         paddle.draw(g);
         ball.draw(g);
 
-        for (int i = 0; i < BRICK_COLUMNS; i++) {
-            for (int j = 0; j < BRICK_ROWS; j++) {
-                brick[i][j].draw(g);
+        for (int j = 0; j < BRICK_ROWS; j++) {
+            for (int i = 0; i < BRICK_COLUMNS; i++) {
+                brick[j][i].draw(g);
             }
         }
         g.setColor(Color.BLACK);
