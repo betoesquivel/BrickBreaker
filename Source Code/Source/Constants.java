@@ -52,6 +52,10 @@ public interface Constants {
 	public static final int PADDLE_Y_START = 450;
 	public static final int PADDLE_MIN = 35;
 	public static final int PADDLE_MAX = 140;
+        public static final int PADDLE_DEFAULT_SPEED = 3; 
+        public static final int PADDLE_LEFT = -1;
+        public static final int PADDLE_RIGHT = 1; 
+        public static final int PADDLE_STOP = 0; 
 
 	//Bricks
 	public static final int BRICK_WIDTH = 50;

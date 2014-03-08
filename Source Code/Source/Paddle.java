@@ -1,70 +1,119 @@
 package Source;
 
 /*
-*    Brick Breaker, Version 1.2
-*    By Ty-Lucas Kelley
-*	
-*	 **LICENSE**
-*
-*	 This file is a part of Brick Breaker.
-*
-*	 Brick Breaker is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation, either version 3 of the License, or
-*    (at your option) any later version.
-*
-*    Brick Breaker is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-*    GNU General Public License for more details.
-*
-*    You should have received a copy of the GNU General Public License
-*    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
+ *    Brick Breaker, Version 1.2
+ *    By Ty-Lucas Kelley
+ *	
+ *	 **LICENSE**
+ *
+ *	 This file is a part of Brick Breaker.
+ *
+ *	 Brick Breaker is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    Brick Breaker is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with Brick Breaker.  If not, see <http://www.gnu.org/licenses/>.
+ */
 //This "Paddle" class extends the "Structure" class. It is used for the player's paddle in the game.
-
 //Imports
 import java.awt.*;
 import java.awt.event.*;
 
 //Class definition
 public class Paddle extends Structure implements Constants {
-	//Variables
-	private int xSpeed;
 
-	//Constructor
-	public Paddle(int x, int y, int width, int height, Color color) {
-		super(x, y, width, height, color);
-	}
+    //Variables
+    private int xSpeed;
+    private int direction;
 
-	//Draws the paddle
-	@Override
-	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fillRect(x, y, width, height);
-	}
+    //Constructor
+    public Paddle(int x, int y, int width, int height, Color color) {
+        super(x, y, width, height, color);
+        direction = PADDLE_STOP;
+        xSpeed = PADDLE_DEFAULT_SPEED;
+    }
 
-	//Places the paddle back in starting position at center of screen
-	public void reset() {
-		x = PADDLE_X_START;
-		y = PADDLE_Y_START;
-	}
+    //Getters and Setters
+    /**
+     * Access function getxSpeed
+     * @return variable xSpeed type <code>int</code>
+     */
+    public int getxSpeed() {
+        return xSpeed;
+    }
 
-	//Checks if the ball hit the paddle
-	public boolean hitPaddle(int ballX, int ballY) {
-		if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y) && (ballY <= y + height))) {
-			return true;
-		}
-		return false;
-	}
+    /**
+     * Modify function setxSpeed
+     * @param xSpeed type <code>int</code>
+     */
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
 
-	//Resizes the paddle if it touches an item, then returns true or false
-	public boolean caughtItem(Item i) {
-		if ((i.getX() < x + width) && (i.getX() + i.getWidth() > x) && (y == i.getY() || y == i.getY() - 1)) {
-			i.resizePaddle(this);
-			return true;
-		}
-		return false;
-	}
+    /**
+     * Access function getDirection
+     * @return variable direction type <code>int</code>
+     */
+    public int getDirection() {
+        return direction;
+    }
+
+    /**
+     * Modify function setDirection
+     * @param direction type <code>int</code>
+     */
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    //Draws the paddle
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(color);
+        g.fillRect(x, y, width, height);
+    }
+
+    //Places the paddle back in starting position at center of screen
+    public void reset() {
+        x = PADDLE_X_START;
+        y = PADDLE_Y_START;
+    }
+
+    //Checks if the ball hit the paddle
+    public boolean hitPaddle(int ballX, int ballY) {
+        if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y) && (ballY <= y + height))) {
+            return true;
+        }
+        return false;
+    }
+
+    //Resizes the paddle if it touches an item, then returns true or false
+    public boolean caughtItem(Item i) {
+        if ((i.getX() < x + width) && (i.getX() + i.getWidth() > x) && (y == i.getY() || y == i.getY() - 1)) {
+            i.resizePaddle(this);
+            return true;
+        }
+        return false;
+    }
+
+    //Moves the paddle in the direction it should move
+    public void move() {
+        switch (direction) {
+            case PADDLE_LEFT:
+                setX(getX() - xSpeed);
+                break;
+            case PADDLE_RIGHT:
+                setX(getX() + xSpeed);
+                break;
+            case PADDLE_STOP: //no hago nada
+                break;
+        }
+    }
 }
