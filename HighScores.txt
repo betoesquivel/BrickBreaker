@@ -10,4 +10,5 @@ Name: Player2, Score: 648
 Name: Player6, Score: 355
 Name: Player7, Score: 121
 Name: Hugo, Score: -100
+Name: h, Score: -100
 Name: hugo, Score: -400

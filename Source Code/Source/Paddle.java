@@ -100,12 +100,13 @@ public class Paddle extends Structure implements Constants {
         //g.fillRect(x, y, width, height);
         g.drawImage(icono1.getImage(), x, y, null);
         
-        if (agrandar>0) {
+        if (agrandar==1) {
             g.drawImage(icono2.getImage(), x+PADDLE_WIDTH, y, null);
         }
         
-        if (agrandar>1) {
-            g.drawImage(icono2.getImage(), x-PADDLE_WIDTH, y, null);
+        if (agrandar==2) {
+            g.drawImage(icono2.getImage(), x+PADDLE_WIDTH, y, null);
+            g.drawImage(icono3.getImage(), x + 2 * PADDLE_WIDTH, y, null);
         }
     }
     

@@ -88,10 +88,12 @@ public class Board extends JPanel implements Runnable, Constants {
         addKeyListener(new BoardListener());
         setFocusable(true);
         
-        URL urlPaddle = this.getClass().getResource("/Source/images/barra.png");
+        URL urlPaddle = this.getClass().getResource("/Source/images/walterGlasses.png");
+        URL urlPaddle2 = this.getClass().getResource("/Source/images/jesseHat.png");
+        URL urlPaddle3 = this.getClass().getResource("/Source/images/betterCallSaul.png");
 
         makeBricks();
-        paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK, Toolkit.getDefaultToolkit().getImage(urlPaddle),Toolkit.getDefaultToolkit().getImage(urlPaddle),Toolkit.getDefaultToolkit().getImage(urlPaddle));
+        paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK, Toolkit.getDefaultToolkit().getImage(urlPaddle),Toolkit.getDefaultToolkit().getImage(urlPaddle2),Toolkit.getDefaultToolkit().getImage(urlPaddle3));
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
