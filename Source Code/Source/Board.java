@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.TreeMap;
 import java.awt.Toolkit.*;
+import java.net.URL;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
@@ -86,9 +87,11 @@ public class Board extends JPanel implements Runnable, Constants {
         super.setSize(width, height);
         addKeyListener(new BoardListener());
         setFocusable(true);
+        
+        URL urlPaddle = this.getClass().getResource("/Source/images/barra.png");
 
         makeBricks();
-        paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
+        paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK, Toolkit.getDefaultToolkit().getImage(urlPaddle),Toolkit.getDefaultToolkit().getImage(urlPaddle),Toolkit.getDefaultToolkit().getImage(urlPaddle));
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name

@@ -46,8 +46,8 @@ public interface Constants {
     public static final int BALL_Y_START = WINDOW_HEIGHT / 2 - BALL_HEIGHT / 2;
 
     //Paddle
-    public static final int PADDLE_WIDTH = 70;
-    public static final int PADDLE_HEIGHT = 10;
+    public static final int PADDLE_WIDTH = 195;
+    public static final int PADDLE_HEIGHT = 33;
     public static final int PADDLE_RIGHT_BOUND = WINDOW_WIDTH - PADDLE_WIDTH;
     public static final int PADDLE_BOTTOM_BOUND = WINDOW_HEIGHT - PADDLE_HEIGHT;
     public static final int PADDLE_X_START = WINDOW_WIDTH / 2 - PADDLE_WIDTH / 2;
@@ -64,7 +64,7 @@ public interface Constants {
     public static final int BRICK_HEIGHT = 25;
     public static final int MAX_BRICKS = 65;
     public static final int BRICK_COLUMNS = 15;
-    public static final int BRICK_ROWS = 5;
+    public static final int BRICK_ROWS = 9;
     public static final int NO_BRICKS = 0;
 
     //Brick Colors

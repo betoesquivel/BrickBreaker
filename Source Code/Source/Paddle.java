@@ -25,6 +25,9 @@ package Source;
 //Imports
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
 
 //Class definition
 public class Paddle extends Structure implements Constants {
@@ -32,12 +35,21 @@ public class Paddle extends Structure implements Constants {
     //Variables
     private int xSpeed;
     private int direction;
+    private ImageIcon icono1;    //icono.
+    private ImageIcon icono2;    //icono.
+    private ImageIcon icono3;    //icono.
+    private int agrandar;
+    
 
     //Constructor
-    public Paddle(int x, int y, int width, int height, Color color) {
+    public Paddle(int x, int y, int width, int height, Color color, Image paddle1, Image paddle2, Image paddle3) {
         super(x, y, width, height, color);
         direction = PADDLE_STOP;
         xSpeed = PADDLE_DEFAULT_SPEED;
+        icono1 = new ImageIcon(paddle1);
+        icono2 = new ImageIcon(paddle2);
+        icono3 = new ImageIcon(paddle3);
+        agrandar = 0;
     }
 
     //Getters and Setters
@@ -55,6 +67,14 @@ public class Paddle extends Structure implements Constants {
      */
     public void setxSpeed(int xSpeed) {
         this.xSpeed = xSpeed;
+    }
+    
+    public void setAgrandar(int a) {
+        agrandar = a;
+    }
+    
+    public int getAgrandar() {
+        return agrandar;
     }
 
     /**
@@ -76,9 +96,19 @@ public class Paddle extends Structure implements Constants {
     //Draws the paddle
     @Override
     public void draw(Graphics g) {
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
+        //g.setColor(color);
+        //g.fillRect(x, y, width, height);
+        g.drawImage(icono1.getImage(), x, y, null);
+        
+        if (agrandar>0) {
+            g.drawImage(icono2.getImage(), x+PADDLE_WIDTH, y, null);
+        }
+        
+        if (agrandar>1) {
+            g.drawImage(icono2.getImage(), x-PADDLE_WIDTH, y, null);
+        }
     }
+    
 
     //Places the paddle back in starting position at center of screen
     public void reset() {
