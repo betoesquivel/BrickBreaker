@@ -149,7 +149,7 @@ public class Paddle extends Structure implements Constants {
 
     //Checks if the ball hit the paddle
     public boolean hitPaddle(int ballX, int ballY) {
-        if ((ballX >= x) && (ballX <= x + width) && ((ballY >= y) && (ballY <= y + height))) {
+        if ((ballX >= x) && (ballX <= x + width) && ((ballY + 27 >= y) && (ballY + 27 <= y + height))) {
             return true;
         }
         return false;

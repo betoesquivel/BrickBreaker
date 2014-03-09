@@ -39,8 +39,8 @@ public interface Constants {
     public static final int MIN_LIVES = 0;
 
     //Ball
-    public static final int BALL_WIDTH = 10;
-    public static final int BALL_HEIGHT = 10;
+    public static final int BALL_WIDTH = 22;
+    public static final int BALL_HEIGHT = 27;
     public static final int BALL_RIGHT_BOUND = WINDOW_WIDTH - BALL_WIDTH;
     public static final int BALL_BOTTOM_BOUND = WINDOW_HEIGHT - BALL_HEIGHT;
     public static final int BALL_X_START = WINDOW_WIDTH / 2 - BALL_WIDTH / 2;

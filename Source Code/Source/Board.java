@@ -106,7 +106,7 @@ public class Board extends JPanel implements Runnable, Constants {
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
-        playerName = JOptionPane.showInputDialog(null, "Please enter your name:", "Breaking Bad Bricks", JOptionPane.QUESTION_MESSAGE);
+        playerName = JOptionPane.showInputDialog(null, "Introduza su nombre:", "Breaking Bad Bricks", JOptionPane.QUESTION_MESSAGE);
         if (playerName == null) {
             System.exit(0);
         }
@@ -117,7 +117,7 @@ public class Board extends JPanel implements Runnable, Constants {
 
         //Start Screen that displays information and asks if the user wants music or not, stores that choice
         String[] options = {"Yes", "No"};
-        withSound = JOptionPane.showOptionDialog(null, "Breaking Bad Bricks\nHugo León Garza A01139720\nJosé Alberto Esquivel Patiño A01139626\n\nControls\n    Spacebar: Start game, Pause/Resume while in game.\n    Left/Right arrow keys: Move paddle\nItems\n    Green Item: Expand paddle\n    Red Item: Shrink paddle\nScoring\n    Block: 50 points\n    Level-up: 100 points\n    Life Loss: -100 points\n\n\n     Do you want background music?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        withSound = JOptionPane.showOptionDialog(null, "Breaking Bad Bricks\nHugo León Garza A01139720\nJosé Alberto Esquivel Patiño A01139626\n\nControles\n    Spacebar: Empezar Juego \n Letra 'P': Pausar/Resumir el juego\n    Flechas Izquierda '<--' y Derecha '-->': Para mover la barra\n Objetos\n    Objeto Verde: Expandir barra\n    Objeto Rojo: Encoger barra\nPuntaje\n    Bloques de Metanfetaminas: 50 points\n    Level-up: 100 points\n    Pérdida de una Vida: -100 points\n\n\n     Quieres música de fondo?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
         playMusic(trackList, withSound, level);
 
         background = Toolkit.getDefaultToolkit().getImage(backgroundURL);
@@ -452,10 +452,10 @@ public class Board extends JPanel implements Runnable, Constants {
             }
         }
         g.setColor(Color.WHITE);
-        g.drawString("Lives: " + lives, 10, getHeight() - (getHeight() / 10));
-        g.drawString("Score: " + score, 10, getHeight() - (2 * (getHeight() / 10)) + 25);
-        g.drawString("Level: " + level, 10, getHeight() - (3 * (getHeight() / 10)) + 50);
-        g.drawString("Player: " + playerName, 10, getHeight() - (4 * (getHeight() / 10)) + 75);
+        g.drawString("Vidas: " + lives, 10, getHeight() - (getHeight() / 10));
+        g.drawString("Puntaje: " + score, 10, getHeight() - (2 * (getHeight() / 10)) + 25);
+        g.drawString("Nivel: " + level, 10, getHeight() - (3 * (getHeight() / 10)) + 50);
+        g.drawString("Jugador: " + playerName, 10, getHeight() - (4 * (getHeight() / 10)) + 75);
 
         for (Item i : items) {
             i.draw(g);
@@ -465,8 +465,8 @@ public class Board extends JPanel implements Runnable, Constants {
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.WHITE);
-            g.drawString("Name: " + playerName + ", Score: " + score + ", Level: " + level, getWidth() / 5, 20);
-            g.drawString("Game Over! Did you make it onto the high score table?", getWidth() / 5, 50);
+            g.drawString("Nombre: " + playerName + ",  Puntaje: " + score + ",  Nivel: " + level, getWidth() / 5, 20);
+            g.drawString("Game Over! Lograste estar dentro de los 10 mejores? \n Busca tu nombre en la siguiente lista", getWidth() / 5, 50);
             try {
                 printScores(g);
             } catch (IOException ioe) {
@@ -674,6 +674,8 @@ public class Board extends JPanel implements Runnable, Constants {
                         start();
                     }
                 } else {
+                    paddle.setAgrandar(0);
+                    paddle.setWidth(PADDLE_WIDTH);
                     paddle.setWidth(getWidth() / 7);
                     lives = MAX_LIVES;
                     score = 0;
@@ -693,6 +695,16 @@ public class Board extends JPanel implements Runnable, Constants {
                     }
                 }
             }
+            
+            if (key == KeyEvent.VK_P) {
+                if (isPaused.get() == false) {
+                    stop();
+                    isPaused.set(true);
+                } else {
+                    start();
+                }
+            }
+            
             if (key == KeyEvent.VK_LEFT) {
                 paddle.setDirection(PADDLE_LEFT);
             }
