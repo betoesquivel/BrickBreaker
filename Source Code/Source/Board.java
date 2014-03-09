@@ -48,6 +48,10 @@ public class Board extends JPanel implements Runnable, Constants {
     private Paddle paddle;
     private Ball ball;
     private Brick[][] brick = new Brick[BRICK_ROWS][BRICK_COLUMNS];
+    
+    //tiempos de animacion
+    private long tiempoActual;
+    private long tiempoInicial;
 
     //Initial Values for some important variables
     private int score = 0, lives = MAX_LIVES, bricksLeft = MAX_BRICKS, waitTime = 5, xSpeed, withSound, level = 1;
@@ -196,6 +200,9 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //runs the game
     public void run() {
+        //Guarda el tiempo actual del sistema
+        tiempoActual = System.currentTimeMillis();
+        
         xSpeed = 1;
         while (true) {
             int x1 = ball.getX();
@@ -210,7 +217,16 @@ public class Board extends JPanel implements Runnable, Constants {
                     xSpeed++;
                 }
             }
-
+            
+            long tiempoTranscurrido =
+                System.currentTimeMillis() - tiempoActual;
+            
+            //Guarda el tiempo actual
+            tiempoActual += tiempoTranscurrido;
+            
+            paddle.actualiza(tiempoTranscurrido);
+            ball.actualiza(tiempoTranscurrido);
+            
             checkPaddle(x1, y1);
             checkWall(x1, y1);
             checkBricks(x1, y1);
@@ -221,6 +237,10 @@ public class Board extends JPanel implements Runnable, Constants {
             dropItems();
             checkItemList();
             repaint();
+            
+            if(lives == 0) {
+                paddle.setAgrandar(0);
+            }
 
             try {
                 game.sleep(waitTime);
@@ -274,7 +294,6 @@ public class Board extends JPanel implements Runnable, Constants {
             isPaused.set(true);
         }
         if (lives == MIN_LIVES) {
-            paddle.setAgrandar(1);
             repaint();
             stop();
             isPaused.set(true);

@@ -39,6 +39,7 @@ public class Paddle extends Structure implements Constants {
     private ImageIcon icono2;    //icono.
     private ImageIcon icono3;    //icono.
     private int agrandar;
+    private final Animacion animacion;
     
 
     //Constructor
@@ -46,10 +47,32 @@ public class Paddle extends Structure implements Constants {
         super(x, y, width, height, color);
         direction = PADDLE_STOP;
         xSpeed = PADDLE_DEFAULT_SPEED;
-        icono1 = new ImageIcon(paddle1);
-        icono2 = new ImageIcon(paddle2);
-        icono3 = new ImageIcon(paddle3);
+        //icono1 = new ImageIcon(paddle1);
+        //icono2 = new ImageIcon(paddle2);
+        //icono3 = new ImageIcon(paddle3);
         agrandar = 0;
+        
+        //Image barra1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesbueno/nino1.gif"));
+        //Image barra2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesbueno/nino2.gif"));
+        //Image barra3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesbueno/nino3.gif"));
+        
+        animacion = new Animacion();
+        animacion.sumaCuadro(paddle1, 100);
+        animacion.sumaCuadro(paddle2, 100);
+        animacion.sumaCuadro(paddle3, 100);
+    }
+    
+    /*
+     * Metodo de acceso que regresa la imagen del icono 
+     * @return un objeto de la clase <code>Image</code> que es la imagen del icono.
+     */
+   public Image getImagenI() {
+           //return icono.getImage();
+       return (new ImageIcon(animacion.getImagen())).getImage();
+   }
+    
+    public void actualiza(long tiempo) {
+        animacion.actualiza(tiempo);
     }
 
     //Getters and Setters
@@ -69,10 +92,17 @@ public class Paddle extends Structure implements Constants {
         this.xSpeed = xSpeed;
     }
     
+    /**
+     * Modify function setxSpeed
+     * @param agrandar type <code>int</code>
+     */
     public void setAgrandar(int a) {
         agrandar = a;
     }
-    
+    /**
+     * Access function getxSpeed
+     * @return variable agrandar type <code>int</code>
+     */
     public int getAgrandar() {
         return agrandar;
     }
@@ -98,15 +128,15 @@ public class Paddle extends Structure implements Constants {
     public void draw(Graphics g) {
         //g.setColor(color);
         //g.fillRect(x, y, width, height);
-        g.drawImage(icono1.getImage(), x, y, null);
+        g.drawImage(this.getImagenI(), x, y, null);
         
         if (agrandar==1) {
-            g.drawImage(icono2.getImage(), x + PADDLE_WIDTH, y, null);
+            g.drawImage(this.getImagenI(), x + PADDLE_WIDTH, y, null);
         }
         
         if (agrandar==2) {
-            g.drawImage(icono2.getImage(), x + PADDLE_WIDTH, y, null);
-            g.drawImage(icono3.getImage(), x + 2 * PADDLE_WIDTH, y, null);
+            g.drawImage(this.getImagenI(), x + PADDLE_WIDTH, y, null);
+            g.drawImage(this.getImagenI(), x + 2 * PADDLE_WIDTH, y, null);
         }
     }
     
