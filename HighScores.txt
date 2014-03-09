@@ -26,6 +26,8 @@ Name: h, Score: 100
 Name: h, Score: 50
 Name: h, Score: 50
 Name: h, Score: 50
+Name: Hugo, Score: 50
+Name: Hugo, Score: 50
 Name: h, Score: 0
 Name: Hugo, Score: -100
 Name: h, Score: -100
