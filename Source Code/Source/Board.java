@@ -38,6 +38,11 @@ import java.net.URL;
 
 //Class definition
 public class Board extends JPanel implements Runnable, Constants {
+    
+    private Image dbImage;    // Imagen a proyectar
+    private Graphics dbg;	// Objeto grafico
+    private Image background;
+    private URL backgroundURL = this.getClass().getResource("/Source/images/ruvbackgroundimage.png");
 
     //Items on-screen
     private Paddle paddle;
@@ -111,6 +116,8 @@ public class Board extends JPanel implements Runnable, Constants {
         withSound = JOptionPane.showOptionDialog(null, "Brick Breaker, Version 1.2\nTy-Lucas Kelley\nVisit www.tylucaskelley.com for more projects.\n\nControls\n    Spacebar: Start game, Pause/Resume while in game.\n    Left/Right arrow keys: Move paddle\nItems\n    Green Item: Expand paddle\n    Red Item: Shrink paddle\nScoring\n    Block: 50 points\n    Level-up: 100 points\n    Life Loss: -100 points\n\n\n     Do you want background music?", "About the Game", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
         playMusic(trackList, withSound, level);
 
+        background = Toolkit.getDefaultToolkit().getImage(backgroundURL);
+        setBackground(GRAY_BRICK_THREE);
         game = new Thread(this);
         game.start();
         stop();
@@ -383,12 +390,40 @@ public class Board extends JPanel implements Runnable, Constants {
             e.printStackTrace();
         }
     }
+        /**
+     * Metodo <I>update</I> sobrescrito de la clase <code>Applet</code>,
+     * heredado de la clase Container.<P>
+     * En este metodo lo que hace es actualizar el contenedor
+     *
+     * @param g es el <code>objeto grafico</code> usado para dibujar.
+     */
+    public void paint(Graphics g) {
+        // Inicializan el DoubleBuffer
+        if (dbImage == null) {
+            dbImage = createImage(this.getSize().width, this.getSize().height);
+            dbg = dbImage.getGraphics();
+        }
 
-    //fills the board
-    @Override
-    public void paintComponent(Graphics g) {
+        // Actualiza la imagen de fondo.
+        dbg.setColor(getBackground());
+        dbg.fillRect(0, 0, this.getSize().width, this.getSize().height);
+        dbg.drawImage(background, 0, 0, null);
+
+        // Actualiza el Foreground.
+        dbg.setColor(getForeground());
+        paint1(dbg);
+
+        // Dibuja la imagen actualizada
+        g.drawImage(dbImage, 0, 0, this);
+
+        paint1(g);
+    }
+        //fills the board
+    public void paint1(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
+        //Esto dibuja la imagen de fondo que este en background... Si jala pero hasta que le picas space
+//        g.drawImage(background, 0, 0, null);
         paddle.draw(g);
         ball.draw(g);
 
@@ -421,6 +456,42 @@ public class Board extends JPanel implements Runnable, Constants {
             g.drawString("Press the Spacebar twice to play again.", getWidth() / 5, getHeight() - 20);
         }
     }
+//    //fills the board
+//    public void paintComponent(Graphics g) {
+//        Toolkit.getDefaultToolkit().sync();
+//        super.paintComponent(g);
+//        paddle.draw(g);
+//        ball.draw(g);
+//
+//        for (int j = 0; j < BRICK_ROWS; j++) {
+//            for (int i = 0; i < BRICK_COLUMNS; i++) {
+//                brick[j][i].draw(g);
+//            }
+//        }
+//        g.setColor(Color.BLACK);
+//        g.drawString("Lives: " + lives, 10, getHeight() - (getHeight() / 10));
+//        g.drawString("Score: " + score, 10, getHeight() - (2 * (getHeight() / 10)) + 25);
+//        g.drawString("Level: " + level, 10, getHeight() - (3 * (getHeight() / 10)) + 50);
+//        g.drawString("Player: " + playerName, 10, getHeight() - (4 * (getHeight() / 10)) + 75);
+//
+//        for (Item i : items) {
+//            i.draw(g);
+//        }
+//
+//        if (lives == MIN_LIVES) {
+//            g.setColor(Color.BLACK);
+//            g.fillRect(0, 0, getWidth(), getHeight());
+//            g.setColor(Color.WHITE);
+//            g.drawString("Name: " + playerName + ", Score: " + score + ", Level: " + level, getWidth() / 5, 20);
+//            g.drawString("Game Over! Did you make it onto the high score table?", getWidth() / 5, 50);
+//            try {
+//                printScores(g);
+//            } catch (IOException ioe) {
+//                ioe.printStackTrace();
+//            }
+//            g.drawString("Press the Spacebar twice to play again.", getWidth() / 5, getHeight() - 20);
+//        }
+//    }
 
     //Makes sure the HighScores.txt file exists
     public void makeTable() throws IOException {
