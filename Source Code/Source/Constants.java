@@ -24,6 +24,7 @@ package Source;
 //This "Constants" interface contains constant values used in multiple classes.
 //Imports
 import java.awt.Color;
+import java.net.URL;
 
 //Class definition
 public interface Constants {
@@ -67,6 +68,7 @@ public interface Constants {
     public static final int BRICK_ROWS = 10;
     public static final int MAX_BRICKS = 120;
     public static final int NO_BRICKS = 0;
+    public static final int COLLISION_CYCLES = 15; 
     
     //Periodic Table Positions
     public static final int PERIODIC_TABLE [][] = new int[][]{
@@ -106,7 +108,21 @@ public interface Constants {
     public static final Color GREEN_BRICK_THREE = new Color(0, 255, 0);
     
     //Brick Image URLs
-//    public static final URL 
+    public static final String methURL = "/Source/images/iceBlock.png";
+    public static final String damagedMethURL = "/Source/images/iceBlockDamaged.png";
+    public static final String destroyedMethURL = "/Source/images/iceBlockCollision.gif";
+    
+    public static final String [] headBricks = {
+        "/Source/images/gusHead.png",
+        "/Source/images/hankHead.png",
+        "/Source/images/lydiaHead.png",
+        "/Source/images/salamancaHead.png",
+        "/Source/images/todHead.png",
+        "/Source/images/tucoHead.png",
+        "/Source/images/twinHead.png",
+        "/Source/images/twinHead.png"
+    };
+    public static final int HEADNUM = 8; 
     
     //Items
     public static final int ITEM_WIDTH = 20;

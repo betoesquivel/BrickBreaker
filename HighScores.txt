@@ -3,6 +3,7 @@ Name: Player9, Score: 1992
 Name: Player1, Score: 1986
 Name: Player10, Score: 1889
 Name: Player4, Score: 1614
+Name: beto, Score: 1500
 Name: h, Score: 1200
 Name: Player5, Score: 1145
 Name: Player3, Score: 864

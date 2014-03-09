@@ -123,15 +123,43 @@ public class Board extends JPanel implements Runnable, Constants {
 
     //fills the array of bricks
     public void makeBricks() {
+        int characterIndex = 0 % HEADNUM; //index that cycles through heads on the array
         for (int j = 0; j < BRICK_ROWS; j++) {
             for (int i = 0; i < BRICK_COLUMNS; i++) {
                 Random rand = new Random();
                 int itemType = rand.nextInt(3) + 1;
                 int DestroyedOrNot = isInThePeriodicTable(j, i);
-                int numLives = 2;
+                //randomly choose if brick is going to be a character
+                boolean isCharacter = ((rand.nextInt(2) + 1) == 1) ? true : false;
+                int numLives;
                 Color color = colors[rand.nextInt(7)][0];
-                brick[j][i] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
-                if (DestroyedOrNot == 1) {
+
+                //bricks have 2 lives, characters have 1 live
+                if (isCharacter) {
+                    numLives = 1;
+                    URL imageURL = this.getClass().getResource(headBricks[characterIndex]);
+                    //creates character imageicon
+                    ImageIcon brickImage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(imageURL));
+                    characterIndex = (characterIndex + 1) % HEADNUM; //update index 
+
+                    brick[j][i] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType, brickImage);
+                    brick[j][i].setIsCharacter(true);
+                } else {
+                    numLives = 2;
+
+                    URL imageURL = this.getClass().getResource(methURL);
+                    ImageIcon brickImage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(imageURL));
+
+                    URL damagedImageURL = this.getClass().getResource(damagedMethURL);
+                    ImageIcon damBrickImage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(damagedImageURL));
+
+                    URL collAnimURL = this.getClass().getResource(destroyedMethURL);
+                    ImageIcon collAnimBrick = new ImageIcon(Toolkit.getDefaultToolkit().getImage(collAnimURL));
+                    brick[j][i] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType, brickImage, damBrickImage, collAnimBrick);
+                    brick[j][i].setIsCharacter(false);
+                }
+
+                if (DestroyedOrNot != 0) {
                     brick[j][i].setDestroyed(false);
                 } else {
                     brick[j][i].setDestroyed(true);
