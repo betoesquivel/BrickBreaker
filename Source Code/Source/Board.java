@@ -42,7 +42,7 @@ public class Board extends JPanel implements Runnable, Constants {
     private Image dbImage;    // Imagen a proyectar
     private Graphics dbg;	// Objeto grafico
     private Image background;
-    private URL backgroundURL = this.getClass().getResource("/Source/images/ruvbackgroundimage.png");
+    private URL backgroundURL = this.getClass().getResource("/Source/images/fondobreakingbad2.jpg");
 
     //Items on-screen
     private Paddle paddle;
@@ -442,7 +442,7 @@ public class Board extends JPanel implements Runnable, Constants {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
         //Esto dibuja la imagen de fondo que este en background... Si jala pero hasta que le picas space
-//        g.drawImage(background, 0, 0, null);
+        g.drawImage(background, 0, 0, null);
         paddle.draw(g);
         ball.draw(g);
 
@@ -451,7 +451,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 brick[j][i].draw(g);
             }
         }
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.drawString("Lives: " + lives, 10, getHeight() - (getHeight() / 10));
         g.drawString("Score: " + score, 10, getHeight() - (2 * (getHeight() / 10)) + 25);
         g.drawString("Level: " + level, 10, getHeight() - (3 * (getHeight() / 10)) + 50);
