@@ -45,7 +45,7 @@ public class Board extends JPanel implements Runnable, Constants {
     private Brick[][] brick = new Brick[BRICK_ROWS][BRICK_COLUMNS];
 
     //Initial Values for some important variables
-    private int score = 0, lives = MAX_LIVES, bricksLeft = MAX_BRICKS, waitTime = 3, xSpeed, withSound, level = 1;
+    private int score = 0, lives = MAX_LIVES, bricksLeft = MAX_BRICKS, waitTime = 5, xSpeed, withSound, level = 1;
 
     //Player's name
     private String playerName;
@@ -239,6 +239,7 @@ public class Board extends JPanel implements Runnable, Constants {
             isPaused.set(true);
         }
         if (lives == MIN_LIVES) {
+            paddle.setAgrandar(1);
             repaint();
             stop();
             isPaused.set(true);

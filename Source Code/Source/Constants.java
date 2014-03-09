@@ -47,7 +47,7 @@ public interface Constants {
     public static final int BALL_DEFAULT_SPEED = 1; 
 
     //Paddle
-    public static final int PADDLE_WIDTH = 45;
+    public static final int PADDLE_WIDTH = 40;
     public static final int PADDLE_HEIGHT = 57;
     public static final int PADDLE_RIGHT_BOUND = WINDOW_WIDTH - PADDLE_WIDTH;
     public static final int PADDLE_BOTTOM_BOUND = WINDOW_HEIGHT - PADDLE_HEIGHT;
