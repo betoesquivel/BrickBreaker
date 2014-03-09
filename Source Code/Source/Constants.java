@@ -29,7 +29,7 @@ import java.awt.Color;
 public interface Constants {
 
     //Window Size
-    public static final int WINDOW_WIDTH = 700;
+    public static final int WINDOW_WIDTH = 640;
     public static final int WINDOW_HEIGHT = 700;
     public static final int WINDOW_HEIGHT_OFFSET = 30; 
 
@@ -61,24 +61,25 @@ public interface Constants {
     public static final int PADDLE_STOP = 0;
 
     //Bricks
-    public static final int BRICK_WIDTH = 39;
-    public static final int BRICK_HEIGHT = 39;
-    public static final int BRICK_COLUMNS = 18;
-    public static final int BRICK_ROWS = 9;
-    public static final int MAX_BRICKS = BRICK_COLUMNS * BRICK_ROWS;
+    public static final int BRICK_WIDTH = 32;
+    public static final int BRICK_HEIGHT = 32;
+    public static final int BRICK_COLUMNS = 20;
+    public static final int BRICK_ROWS = 10;
+    public static final int MAX_BRICKS = 120;
     public static final int NO_BRICKS = 0;
     
     //Periodic Table Positions
     public static final int PERIODIC_TABLE [][] = new int[][]{
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-        {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0}
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+        {0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0},
+        {0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0},
+        {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+        {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+        {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+        {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+        {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
     };
 
     //Brick Colors
@@ -103,7 +104,10 @@ public interface Constants {
     public static final Color GREEN_BRICK_ONE = new Color(0, 139, 0);
     public static final Color GREEN_BRICK_TWO = new Color(0, 205, 0);
     public static final Color GREEN_BRICK_THREE = new Color(0, 255, 0);
-
+    
+    //Brick Image URLs
+//    public static final URL 
+    
     //Items
     public static final int ITEM_WIDTH = 20;
     public static final int ITEM_HEIGHT = 10;

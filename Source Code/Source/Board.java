@@ -87,13 +87,13 @@ public class Board extends JPanel implements Runnable, Constants {
         super.setSize(width, height);
         addKeyListener(new BoardListener());
         setFocusable(true);
-        
+
         URL urlPaddle = this.getClass().getResource("/Source/images/walterGlasses.png");
         URL urlPaddle2 = this.getClass().getResource("/Source/images/jesseHat.png");
         URL urlPaddle3 = this.getClass().getResource("/Source/images/betterCallSaul.png");
 
         makeBricks();
-        paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK, Toolkit.getDefaultToolkit().getImage(urlPaddle),Toolkit.getDefaultToolkit().getImage(urlPaddle2),Toolkit.getDefaultToolkit().getImage(urlPaddle3));
+        paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK, Toolkit.getDefaultToolkit().getImage(urlPaddle), Toolkit.getDefaultToolkit().getImage(urlPaddle2), Toolkit.getDefaultToolkit().getImage(urlPaddle3));
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
 
         //Get the player's name
@@ -101,7 +101,7 @@ public class Board extends JPanel implements Runnable, Constants {
         if (playerName == null) {
             System.exit(0);
         }
-        if (playerName.toUpperCase().equals("TY") || playerName.toUpperCase().equals("TYKELLEY") || playerName.toUpperCase().equals("TYLUCAS") || playerName.toUpperCase().equals("TYLUCASKELLEY") || playerName.toUpperCase().equals("TY-LUCAS") || playerName.toUpperCase().equals("TY-LUCAS KELLEY") || playerName.toUpperCase().equals("TY KELLEY")) {
+        if (playerName.toUpperCase().equals("BETO") || playerName.toUpperCase().equals("TYKELLEY") || playerName.toUpperCase().equals("TYLUCAS") || playerName.toUpperCase().equals("TYLUCASKELLEY") || playerName.toUpperCase().equals("TY-LUCAS") || playerName.toUpperCase().equals("TY-LUCAS KELLEY") || playerName.toUpperCase().equals("TY KELLEY")) {
             score += 1000;
             JOptionPane.showMessageDialog(null, "You unlocked the secret 1,000 point bonus! Nice name choice by the way.", "1,000 Points", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -116,11 +116,11 @@ public class Board extends JPanel implements Runnable, Constants {
         stop();
         isPaused.set(true);
     }
-    
-    public int isInThePeriodicTable(int j, int i){
-        return PERIODIC_TABLE[j][i]; 
+
+    public int isInThePeriodicTable(int j, int i) {
+        return PERIODIC_TABLE[j][i];
     }
-    
+
     //fills the array of bricks
     public void makeBricks() {
         for (int j = 0; j < BRICK_ROWS; j++) {
@@ -128,7 +128,7 @@ public class Board extends JPanel implements Runnable, Constants {
                 Random rand = new Random();
                 int itemType = rand.nextInt(3) + 1;
                 int DestroyedOrNot = isInThePeriodicTable(j, i);
-                int numLives = 3;
+                int numLives = 2;
                 Color color = colors[rand.nextInt(7)][0];
                 brick[j][i] = new Brick((i * BRICK_WIDTH), ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)), BRICK_WIDTH - 5, BRICK_HEIGHT - 5, color, numLives, itemType);
                 if (DestroyedOrNot == 1) {
@@ -562,9 +562,14 @@ public class Board extends JPanel implements Runnable, Constants {
                     level = 1;
                     makeBricks();
                     isPaused.set(true);
-                    for (int i = 0; i < 10; i++) {
-                        for (int j = 0; j < 5; j++) {
-                            brick[i][j].setDestroyed(false);
+                    for (int j = 0; j < BRICK_ROWS; j++) {
+                        for (int i = 0; i < BRICK_COLUMNS; i++) {
+                            int DestroyedOrNot = isInThePeriodicTable(j, i);
+                            if (DestroyedOrNot == 1) {
+                                brick[j][i].setDestroyed(false);
+                            } else {
+                                brick[j][i].setDestroyed(true);
+                            }
                         }
                     }
                 }

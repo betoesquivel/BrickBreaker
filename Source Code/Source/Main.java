@@ -59,7 +59,7 @@ public class Main extends JFrame implements Constants {
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		
 		//Sets the icon of the program
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("Source Code/Images/Icon.png"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/Source/images/BreakingBadIcon.jpeg"));
 		
 		frame.setVisible(true);
 	}
