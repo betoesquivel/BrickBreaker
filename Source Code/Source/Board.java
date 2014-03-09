@@ -42,7 +42,7 @@ public class Board extends JPanel implements Runnable, Constants {
     private Image dbImage;    // Imagen a proyectar
     private Graphics dbg;	// Objeto grafico
     private Image background;
-    private URL backgroundURL = this.getClass().getResource("/Source/images/fondobreakingbad2.jpg");
+    private URL backgroundURL = this.getClass().getResource("/Source/images/fondoBreakingBad3.jpg");
 
     //Items on-screen
     private Paddle paddle;
